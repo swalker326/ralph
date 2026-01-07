@@ -1,0 +1,228 @@
+{
+  "project": "Zephyr Cloud - Release Pipeline MFE Migration",
+  "tasks": [
+    {
+      "id": "setup-001",
+      "title": "Remove MUI dependencies and set up Tailwind CSS",
+      "description": "Remove @mui/material, tss-react/mui from dependencies and configure Tailwind CSS for the MFE",
+      "status": "completed",
+      "planRef": "ralph/setup-001-plan.md",
+      "dependencies": []
+    },
+    {
+      "id": "theme-001",
+      "title": "Remove MUI ThemeProvider and replace with CSS variables",
+      "description": "Remove MUI ThemeProvider HOC and use Shadcn theme via CSS variables",
+      "status": "completed",
+      "planRef": "ralph/theme-001-plan.md",
+      "dependencies": ["setup-001"]
+    },
+    {
+      "id": "card-environment-001",
+      "title": "Migrate EnvironmentCard component from MUI to Shadcn",
+      "description": "Core component displaying environment columns with drag-drop, settings, and deployment info",
+      "status": "completed",
+      "planRef": "ralph/card-environment-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "card-devops-001",
+      "title": "Migrate DevOpsCard component from MUI to Shadcn",
+      "description": "Displays deployment information with actions, author, timestamp using Shadcn components",
+      "status": "completed",
+      "planRef": "ralph/card-devops-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "ui-top-filter-001",
+      "title": "Migrate TopFilter component from MUI to Shadcn",
+      "description": "Replace TopFilterForm from app-zephyr-forms with Shadcn Input/Select components",
+      "status": "pending",
+      "planRef": "ralph/ui-top-filter-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "ui-breadcrumbs-001",
+      "title": "Migrate Breadcrumbs component from MUI to Shadcn",
+      "description": "Navigation breadcrumbs using Shadcn Breadcrumb component with TanStack Router",
+      "status": "pending",
+      "planRef": "ralph/ui-breadcrumbs-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "ui-card-actions-button-001",
+      "title": "Migrate CardActionsButton component from MUI to Shadcn",
+      "description": "Action button with dropdown menu using Shadcn DropdownMenu",
+      "status": "completed",
+      "planRef": "ralph/ui-card-actions-button-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "ui-sortable-row-001",
+      "title": "Migrate SortableRow component for drag-drop",
+      "description": "Drag-drop row component using @dnd-kit with Tailwind styling",
+      "status": "completed",
+      "planRef": "ralph/ui-sortable-row-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "modal-deployment-action-001",
+      "title": "Migrate DeploymentActionModal from MUI to Shadcn",
+      "description": "Modal for deploy/promote actions with environment selection using Shadcn Dialog",
+      "status": "completed",
+      "planRef": "ralph/modal-deployment-action-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "modal-deployment-history-001",
+      "title": "Migrate DeploymentHistoryModal from MUI to Shadcn",
+      "description": "Modal showing deployment history with Shadcn Table component",
+      "status": "completed",
+      "planRef": "ralph/modal-deployment-history-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "modal-rollback-001",
+      "title": "Migrate RollbackModal from MUI to Shadcn",
+      "description": "Confirmation modal for rollback with version selection using Shadcn AlertDialog",
+      "status": "completed",
+      "planRef": "ralph/modal-rollback-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "modal-problematic-warning-001",
+      "title": "Migrate ProblematicDeploymentWarningModal from MUI to Shadcn",
+      "description": "Warning modal for problematic deployments using Shadcn AlertDialog",
+      "status": "completed",
+      "planRef": "ralph/modal-problematic-warning-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "menu-environment-actions-001",
+      "title": "Migrate EnvironmentActionsMenu from MUI to Shadcn",
+      "description": "Dropdown menu for environment actions using Shadcn DropdownMenu",
+      "status": "completed",
+      "planRef": "ralph/menu-environment-actions-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "section-deployment-summary-001",
+      "title": "Migrate DeploymentSummary section from MUI to Shadcn",
+      "description": "Summary section showing deployment statistics and links with Shadcn Card",
+      "status": "pending",
+      "planRef": "ralph/section-deployment-summary-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "section-release-candidate-001",
+      "title": "Migrate ReleaseCandidateSection from MUI to Shadcn",
+      "description": "Complex section managing release candidates with drag-drop and multiple actions",
+      "status": "pending",
+      "planRef": "ralph/section-release-candidate-001-plan.md",
+      "dependencies": ["card-devops-001", "theme-001"]
+    },
+    {
+      "id": "selection-environment-001",
+      "title": "Migrate EnvironmentSelection from MUI to Shadcn",
+      "description": "Environment selector using Shadcn Label and Select components",
+      "status": "completed",
+      "planRef": "ralph/selection-environment-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "selection-version-001",
+      "title": "Migrate VersionSelection from MUI to Shadcn",
+      "description": "Version selector using Shadcn Select for choosing versions",
+      "status": "completed",
+      "planRef": "ralph/selection-version-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "warning-problematic-001",
+      "title": "Migrate ProblematicWarning component from MUI to Shadcn",
+      "description": "Warning indicator for problematic deployments using Shadcn Alert",
+      "status": "pending",
+      "planRef": "ralph/warning-problematic-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "container-application-devops-001",
+      "title": "Update ApplicationDevOps container after component migrations",
+      "description": "Main container orchestrating release pipeline board with all migrated components",
+      "status": "pending",
+      "planRef": "ralph/container-application-devops-001-plan.md",
+      "dependencies": ["card-environment-001", "card-devops-001", "modal-deployment-action-001", "modal-rollback-001"]
+    },
+    {
+      "id": "container-deployed-environment-list-001",
+      "title": "Update DeployedEnvironmentList container after component migrations",
+      "description": "Container listing deployed environments with Shadcn components",
+      "status": "pending",
+      "planRef": "ralph/container-deployed-environment-list-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "container-devops-rc-list-001",
+      "title": "Update DevopsReleaseCandidateList container after component migrations",
+      "description": "Container for release candidate list using Shadcn AlertDialog and Dialog",
+      "status": "pending",
+      "planRef": "ralph/container-devops-rc-list-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "container-environment-panel-001",
+      "title": "Update EnvironmentPanel container after component migrations",
+      "description": "Panel showing environment details and actions with migrated components",
+      "status": "pending",
+      "planRef": "ralph/container-environment-panel-001-plan.md",
+      "dependencies": ["card-environment-001"]
+    },
+    {
+      "id": "container-release-pipeline-board-001",
+      "title": "Update ReleasePipelineBoard container after component migrations",
+      "description": "Main board container with drag-drop and multiple environment columns",
+      "status": "pending",
+      "planRef": "ralph/container-release-pipeline-board-001-plan.md",
+      "dependencies": ["card-environment-001", "section-release-candidate-001", "ui-top-filter-001"]
+    },
+    {
+      "id": "container-tag-list-001",
+      "title": "Update TagList container after component migrations",
+      "description": "Container listing tags using @repo/app-components",
+      "status": "pending",
+      "planRef": "ralph/container-tag-list-001-plan.md",
+      "dependencies": ["theme-001"]
+    },
+    {
+      "id": "cleanup-001",
+      "title": "Final cleanup and verification",
+      "description": "Verify no MUI or app-zephyr-* component imports remain and all builds succeed",
+      "status": "pending",
+      "planRef": "ralph/cleanup-001-plan.md",
+      "dependencies": [
+        "container-application-devops-001",
+        "container-deployed-environment-list-001",
+        "container-devops-rc-list-001",
+        "container-environment-panel-001",
+        "container-release-pipeline-board-001",
+        "container-tag-list-001"
+      ]
+    },
+    {
+      "id": "test-001",
+      "title": "Add comprehensive tests for release pipeline components",
+      "description": "Create test coverage for migrated components and user flows",
+      "status": "pending",
+      "planRef": "ralph/test-001-plan.md",
+      "dependencies": ["cleanup-001"]
+    },
+    {
+      "id": "docs-001",
+      "title": "Document release pipeline MFE architecture and usage",
+      "description": "Document MFE structure, exported containers, and integration patterns",
+      "status": "pending",
+      "planRef": "ralph/docs-001-plan.md",
+      "dependencies": ["cleanup-001"]
+    }
+  ]
+}

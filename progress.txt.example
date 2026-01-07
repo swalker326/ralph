@@ -1,0 +1,85 @@
+## 2026-01-06 - Completed: Set up error logging
+
+**Task ID:** task-004
+**Plan:** plans/task-004-plan.md
+
+**What was done:**
+- Configured winston logger with multiple transports
+- Added error middleware to Express app
+- Created custom error classes for different error types
+
+**Technical details:**
+- Used winston@3.11.0 for logging
+- Configured file transport for errors and combined logs
+- Added express-async-errors for cleaner async error handling
+- Created ErrorHandler middleware that catches all errors and formats responses
+
+**Files created:**
+- src/utils/logger.ts - Winston logger configuration
+- src/middleware/errorHandler.ts - Centralized error handling middleware
+- src/errors/AppError.ts - Base error class with status codes
+
+**Files modified:**
+- src/app.ts - Added error middleware to Express app
+- package.json - Added winston and express-async-errors dependencies
+
+**Deviations from plan:**
+- Added express-async-errors library (not in original plan) to handle async errors more elegantly
+
+**Next task recommendation:** Work on task-002 (Create user profile page) since task-001 (authentication) is now complete
+
+=== END OF ENTRY ===
+
+## 2026-01-06 - Planned: Set up error logging
+
+**Task ID:** task-004
+**Plan:** plans/task-004-plan.md
+**Rationale:** Selected this task because it's independent (no dependencies) and provides critical infrastructure for debugging. With authentication complete, having proper error logging will help as we build more features.
+
+**NEXT: EXECUTE task-004**
+
+=== END OF ENTRY ===
+
+## 2026-01-06 - Completed: Implement user authentication system
+
+**Task ID:** task-001
+**Plan:** plans/task-001-plan.md
+
+**What was done:**
+- Implemented JWT-based authentication
+- Created registration and login endpoints
+- Added password hashing with bcrypt
+- Created auth middleware for protected routes
+
+**Technical details:**
+- Used bcrypt with 10 salt rounds for password hashing
+- JWT tokens expire after 7 days
+- Auth middleware extracts and verifies JWT from Authorization header
+- Added proper TypeScript types for request extensions
+
+**Files created:**
+- src/utils/auth.ts - Auth utility functions (hashPassword, comparePassword, generateToken, verifyToken)
+- src/middleware/auth.ts - JWT verification middleware
+- src/routes/auth.ts - Authentication endpoints
+
+**Files modified:**
+- src/models/User.ts - Added password field and timestamps
+- src/routes/index.ts - Registered auth routes
+- .env.example - Added JWT_SECRET placeholder
+
+**Deviations from plan:**
+- None - followed plan exactly
+
+**Next task recommendation:** Work on task-002 (Create user profile page) since it depends on task-001 which is now complete
+
+=== END OF ENTRY ===
+
+## 2026-01-06 - Planned: Implement user authentication system
+
+**Task ID:** task-001
+**Plan:** plans/task-001-plan.md
+**Rationale:** Selected this as the first task because it's a foundational feature with no dependencies. Many other features (like user profile) depend on authentication being in place first.
+
+**NEXT: EXECUTE task-001**
+
+=== END OF ENTRY ===
