@@ -27,7 +27,7 @@ fi
 
 # Set command based on agent
 if [ "$AGENT" = "claude" ]; then
-  CMD="/Users/shanewalker/.claude/local/claude --permission-mode acceptEdits"
+  CMD="claude --permission-mode acceptEdits"
   PROMPT_FLAG="-p"
 elif [ "$AGENT" = "codex" ]; then
   CMD="/Users/shanewalker/.nvm/versions/node/v22.12.0/bin/codex exec --full-auto"
@@ -75,7 +75,7 @@ Explicitly state your selection:
 
 1. Read the task spec from ralph/PRD.json (title, description, dependencies)
 2. Explore the codebase to understand context and patterns
-3. Create detailed implementation plan at: ralph/[task-id]-plan.md
+3. Create detailed implementation plan at: ralph/plans/[task-id]-plan.md
 
 Plan format:
 \`\`\`markdown
@@ -108,7 +108,7 @@ Run: pnpm typecheck
 ## Update PRD
 In ralph/PRD.json, update the task:
 - Change \"status\": \"pending\" to \"status\": \"planned\"
-- Verify \"planRef\" points to your plan file (ralph/[task-id]-plan.md)
+- Verify \"planRef\" points to your plan file (ralph/plans/[task-id]-plan.md)
 
 ## Document
 PREPEND to ralph/progress.txt (add at the very top of the file):
@@ -133,7 +133,7 @@ Use this phase when ralph/progress.txt says 'NEXT: EXECUTE [task-id]'.
 ## Load Plan
 1. Read the task-id from ralph/progress.txt
 2. Load task from ralph/PRD.json
-3. Read the implementation plan from planRef path (ralph/[task-id]-plan.md)
+3. Read the implementation plan from planRef path (ralph/plans/[task-id]-plan.md)
 4. Follow the plan step-by-step
 
 ## Implementation
@@ -178,6 +178,15 @@ PREPEND to ralph/progress.txt (add at the very top of the file):
 **Next task recommendation:** [Recommend next task considering dependencies]
 
 === END OF ENTRY ===
+
+## Git
+
+git add and commit your changes with a ralph prefix
+ralph: Complete [Task Title] ([task-id])
+only commit after an execution phase
+only commit files you created/modified for this task
+
+NEVER commit ralph/plans/*.md files
 
 ## Completion Check
 If ALL tasks in ralph/PRD.json have status='completed', output: <promise>COMPLETE</promise>
