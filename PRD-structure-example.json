@@ -1,134 +1,37 @@
 {
-  "projectContext": {
-    "name": "Zephyr Cloud - Applications MFE Migration",
-    "goal": "Migrate application routes and components from libs/app to mfe/applications micro-frontend, replacing MUI with Shadcn UI and exposing routes via Module Federation",
-    "architecture": {
-      "mfe": "mfe/applications/ - Micro-frontend for application features",
-      "sharedComponents": "packages/ui-primitives - shadcn primitive compoennts. packages/app-components/ - Shared Shadcn UI components with business logic and dependencies",
-      "router": "packages/app-router/ - Route definitions",
-      "host": "apps/app-zephyr/ - Host application",
-      "legacy": "libs/app/ - Legacy components being phased out"
-    },
-    "techStack": {
-      "ui": "Shadcn UI (replacing MUI)",
-      "router": "TanStack Router",
-      "moduleFederation": "Rspack Module Federation",
-      "dataFetching": "ze-sdk (React Query based)",
-      "styling": "Tailwind CSS"
-    }
-  },
+  "project": "Zephyr Cloud - Applications MFE Migration",
   "tasks": [
     {
       "id": "fix-001",
-      "category": "fix-existing",
-      "description": "Fix type error in environment-list container",
-      "passes": true,
-      "context": "TypeScript error at line 340 preventing type safety. The orderData structure doesn't match the API expectation.",
-      "why": "Blocks type checking and could cause runtime errors",
-      "dependencies": [],
-      "filesToExamine": [
-        "mfe/applications/src/containers/environment-list/index.tsx"
-      ],
-      "steps": [
-        "Open mfe/applications/src/containers/environment-list/index.tsx",
-        "Navigate to line 340 where type error exists",
-        "Check the useSetEnvironmentOrder SDK hook signature",
-        "Fix orderData to match expected type (string[] not object[])",
-        "Remove the @ts-expect-error comment",
-        "Verify no TypeScript errors remain"
-      ],
-      "acceptanceCriteria": [
-        "No TypeScript errors in environment-list container",
-        "pnpm typecheck passes",
-        "@ts-expect-error comment removed",
-        "Code matches SDK hook expectations"
-      ]
+      "title": "Fix type error in environment-list container",
+      "description": "TypeScript error at line 340 preventing type safety. The orderData structure doesn't match the API expectation.",
+      "status": "completed",
+      "planRef": "applications/fix-001-plan.md",
+      "dependencies": []
     },
     {
       "id": "versions-001",
-      "category": "versions",
-      "description": "Migrate APPLICATION_VERSION_DETAIL route - Create route file",
-      "passes": false,
-      "context": "Part of MFE migration. Version detail page currently in libs/app needs to be exposed as a lazy-loaded route in mfe/applications.",
-      "why": "Enables viewing version details in the MFE architecture",
-      "dependencies": [],
-      "filesToExamine": [
-        "libs/app/app-zephyr-pages/application-version-detail/",
-        "mfe/applications/src/routes/overview/index.tsx",
-        "mfe/applications/module-federation.config.ts"
-      ],
-      "steps": [
-        "Create mfe/applications/src/routes/versions/$versionid/ directory",
-        "Create index.tsx with createLazyRoute pattern",
-        "Use RouteNames.APPLICATION_VERSION_DETAIL from @repo/routes",
-        "Extract organization, project, application, versionid from Route.useParams()",
-        "Create placeholder Component function that returns a div",
-        "Verify route file compiles without errors"
-      ],
-      "acceptanceCriteria": [
-        "Route file exists at correct path",
-        "Uses createLazyRoute pattern correctly",
-        "Exports Route object",
-        "TypeScript compiles without errors",
-        "Follows same pattern as existing routes (overview, versions, etc.)"
-      ]
+      "title": "Migrate APPLICATION_VERSION_DETAIL route - Create route file",
+      "description": "Create lazy-loaded route file for version detail page in mfe/applications",
+      "status": "pending",
+      "planRef": "applications/versions-001-plan.md",
+      "dependencies": []
     },
     {
       "id": "versions-002",
-      "category": "versions",
-      "description": "Migrate APPLICATION_VERSION_DETAIL route - Create container",
-      "passes": false,
-      "context": "After route file exists, need to create the container that fetches data and renders the version detail UI.",
-      "why": "Provides the actual implementation for the version detail page",
-      "dependencies": ["versions-001"],
-      "filesToExamine": [
-        "libs/app/app-zephyr-pages/application-version-detail/",
-        "mfe/applications/src/containers/application-overview/index.tsx",
-        "ze-sdk hooks documentation"
-      ],
-      "steps": [
-        "Examine libs/app/app-zephyr-pages/application-version-detail/ for existing implementation",
-        "Create mfe/applications/src/containers/application-version-detail/ directory",
-        "Implement container with SDK hooks for version detail data",
-        "Replace any MUI components with Shadcn UI equivalents",
-        "Add version metadata display, deployment info, and actions",
-        "Import container in route file created in versions-001",
-        "Test container renders version details correctly"
-      ],
-      "acceptanceCriteria": [
-        "Container uses ze-sdk hooks correctly",
-        "No MUI components (use Shadcn UI)",
-        "Displays all version information",
-        "Handles loading and error states",
-        "Follows existing container patterns"
-      ]
+      "title": "Migrate APPLICATION_VERSION_DETAIL route - Create container",
+      "description": "Implement container with SDK hooks for version detail data using Shadcn UI",
+      "status": "pending",
+      "planRef": "applications/versions-002-plan.md",
+      "dependencies": ["versions-001"]
     },
     {
       "id": "versions-003",
-      "category": "versions",
-      "description": "Migrate APPLICATION_VERSION_DETAIL route - Expose in module federation",
-      "passes": false,
-      "context": "Route and container exist, now need to expose them via Module Federation so host app can lazy-load them.",
-      "why": "Enables the host app to consume this route",
-      "dependencies": ["versions-001", "versions-002"],
-      "filesToExamine": [
-        "mfe/applications/module-federation.config.ts",
-        "apps/app-zephyr/src/app/router.tsx"
-      ],
-      "steps": [
-        "Open mfe/applications/module-federation.config.ts",
-        "Add './ApplicationVersionDetail': './src/routes/versions/$versionid/index.tsx' to exposes",
-        "Run: pnpm --filter applications build",
-        "Verify build completes successfully",
-        "Check that @mfe/applications types are generated",
-        "Test lazy loading works from host app (if running)"
-      ],
-      "acceptanceCriteria": [
-        "Route exposed in module-federation.config.ts",
-        "Build succeeds without errors",
-        "Type definitions generated",
-        "Route can be imported as @mfe/applications/ApplicationVersionDetail"
-      ]
+      "title": "Migrate APPLICATION_VERSION_DETAIL route - Expose in module federation",
+      "description": "Add route to module federation config and verify build and lazy loading",
+      "status": "pending",
+      "planRef": "applications/versions-003-plan.md",
+      "dependencies": ["versions-001", "versions-002"]
     }
   ]
 }
